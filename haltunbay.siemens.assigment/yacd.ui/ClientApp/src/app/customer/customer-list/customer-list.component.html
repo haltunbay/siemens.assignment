@@ -1,0 +1,26 @@
+<table class="table table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>EMail</th>
+            <th>City</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let customer of customers'>
+            <td>{{customer.firstName}}</td>
+            <td>{{customer.lastName}}</td>
+            <td>{{customer.eMail}}</td>
+            <td>{{customer.city}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.phoneNumber}}</td>
+            <td> <button type="button" class="btn btn-link btn-sm">
+                    Open <span class="glyphicon glyphicon-edit"></span>
+                </button> </td>
+        </tr>
+    </tbody>
+</table>

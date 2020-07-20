@@ -22,12 +22,26 @@ export class CustomerService {
             );
     }
 
-    /** GET hero by id. Will 404 if id not found */
+
     getCustomer(firstName: string, lastName: string): Observable<customer> {
         const url = `${webApiUrl}/single?firstName=${firstName}&lastName=${lastName}`;
         return this.http.get<customer>(url).pipe(
             tap(_ => this.log(`fetched customer name=${firstName} ${lastName}`)),
             catchError(this.handleError<customer>(`getCustomer name=${firstName} ${lastName}`))
+        );
+    }
+
+    upsertCustomer(customer: customer): Observable<any> {
+        return this.http.post(webApiUrl, customer, this.httpOptions).pipe(
+            tap(_ => this.log(`updated hero id=${customer.firstName} ${customer.lastName}`)),
+            catchError(this.handleError<any>('updateCustomer'))
+        );
+    }
+
+    deleteCustomer(firstName: String, lastName: String) {
+        return this.http.delete(`${webApiUrl}?firstName=${firstName}&lastName=${lastName}`, this.httpOptions).pipe(
+            tap(_ => this.log(`deleted hero id=${firstName} ${lastName}`)),
+            catchError(this.handleError<any>('deleteCustomer'))
         );
     }
 

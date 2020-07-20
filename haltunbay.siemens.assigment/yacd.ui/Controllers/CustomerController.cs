@@ -39,8 +39,9 @@ namespace yacd.ui.Controllers
         }
 
         [HttpDelete]
-        public Task Delete([FromBody] Customer customer)
+        public Task Delete([FromQuery] string firstName, [FromQuery] string lastName)
         {
+            var customer = new Customer() { firstName = firstName, lastName = lastName };
             return _backendService.DeleteItemAsync(customer);
         }
     }

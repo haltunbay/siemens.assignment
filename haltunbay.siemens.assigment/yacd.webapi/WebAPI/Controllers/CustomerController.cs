@@ -21,7 +21,6 @@ namespace yacd.webapi.Controllers
         }
 
         // GET: api/<CustomersController>
-        [Route("single")]
         [HttpGet]
         public IEnumerable<Customer> Get()
         {

@@ -1,45 +1,53 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Customer Form</div>
+<div class="col-sm-1"></div>
+<div class="panel panel-default col-sm-8">
+    <div class="panel-heading">
+        Customer Form
+    </div>
+
     <div class="panel-body">
-        <form>
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
             <div class="form-group row">
-                <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="firstName" value="">
-                </div>
+                <a routerLink="/customer" routerLinkActive="active" class="btn btn-default"><span
+                        class="glyphicon glyphicon-list"></span> List View</a>
             </div>
             <div class="form-group row">
-                <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="lastName" value="">
-                </div>
+                <label for="firstName">First Name</label>
+                <input class="form-control input-sm" formControlName="firstName">
             </div>
             <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="email" value="">
-                </div>
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control input-sm" formControlName="lastName" value="">
             </div>
             <div class="form-group row">
-                <label for="city" class="col-sm-2 col-form-label">City</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="city" value="">
-                </div>
+                <label for="email">Email</label>
+                <input type="text" class="form-control input-sm" formControlName="eMail" value="">
             </div>
             <div class="form-group row">
-                <label for="address" class="col-sm-2 col-form-label">Address</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="address" value="">
-                </div>
+                <label for="city">City</label>
+                <input type="text" class="form-control input-sm" formControlName="city" value="">
             </div>
             <div class="form-group row">
-                <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" id="phoneNumber" value="">
-                </div>
+                <label for="address">Address</label>
+                <input type="text" class="form-control input-sm" formControlName="address" value="">
             </div>
+            <div class="form-group row">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" class="form-control input-sm" formControlName="phoneNumber" value="">
+            </div>
+            <div class="form-group row">
+                <button type="submit" [disabled]="!customerForm.valid" class="btn btn-default"><span
+                        class="glyphicon glyphicon-floppy-disk"></span>
+                    Submit</button>
+                &nbsp;&nbsp;
+                <button type="button" (onClick)="onCancel()" class="btn btn-default"><span
+                        class="glyphicon glyphicon-menu-left"></span>
+                    Cancel</button>
+            </div>
+
         </form>
 
 
     </div>
 </div>
+
+<div class="col-sm-1"></div>

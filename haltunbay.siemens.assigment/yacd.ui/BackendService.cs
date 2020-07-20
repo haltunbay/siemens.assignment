@@ -63,7 +63,7 @@ namespace yacd.ui
                 Encoding.UTF8,
                 "application/json");
             var method = HttpMethod.Delete;
-            var requestUri = new Uri(Client.BaseAddress + "/customer");
+            var requestUri = new Uri(Client.BaseAddress + "customer");
             var request = new HttpRequestMessage { Content = json, Method = method, RequestUri = requestUri };
             using var httpResponse = await Client.SendAsync(request);
 

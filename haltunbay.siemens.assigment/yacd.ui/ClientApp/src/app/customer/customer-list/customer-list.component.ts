@@ -23,4 +23,13 @@ export class CustomerListComponent implements OnInit {
     );
   }
 
+  deleteCustomer(firstName: string, lastName: string) {
+    if (confirm("Are you sure to delete " + name)) {
+      this.apiService.deleteCustomer(firstName, lastName).subscribe(
+        err => console.error(err),
+        () => console.log(`deleted customer ${firstName} ${lastName}`)
+      );
+    }
+  }
+
 }

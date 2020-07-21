@@ -1,0 +1,94 @@
+<h1 class="code-line" data-line-start=0 data-line-end=1><a id="Yet_Another_Customer_Data_0"></a>Yet Another Customer
+  Data</h1>
+<p class="has-line-data" data-line-start="1" data-line-end="3">Yet Another Customer Data is simple single page
+  application provides CRUD operations on customer data.<br>
+  It is built with</p>
+<ul>
+  <li class="has-line-data" data-line-start="3" data-line-end="4"><a href="http://ASP.NET">ASP.NET</a> Core and C# for
+    cross-platform server-side code</li>
+  <li class="has-line-data" data-line-start="4" data-line-end="5">Angular and TypeScript for client-side code</li>
+  <li class="has-line-data" data-line-start="5" data-line-end="6">Bootstrap and PrimeNg for layout and styling (normally
+    one of them could do work but based on my previous experince I preferred Bootstrap 3 for layout and styling, but I
+    benefit from Primeng features like typehead and modal confirmations.)</li>
+  <li class="has-line-data" data-line-start="6" data-line-end="7">EntityFrameworkCore for Data access</li>
+  <li class="has-line-data" data-line-start="7" data-line-end="8">SQLite for persistence layer. SQLite is preferred
+    because it is stable, cross-platform, serverless. Fits perfectly to our project needs.</li>
+  <li class="has-line-data" data-line-start="8" data-line-end="9">Swashbuckle Swagger for webapi testing</li>
+  <li class="has-line-data" data-line-start="9" data-line-end="11">During development Visual Studio 2019 and Vs Code was
+    used.</li>
+</ul>
+<h2 class="code-line" data-line-start=11 data-line-end=12><a id="Application_components_11"></a>Application components.
+</h2>
+<p class="has-line-data" data-line-start="12" data-line-end="13">The application consist of two components.</p>
+<h3 class="code-line" data-line-start=13 data-line-end=14><a id="Backend_Web_API_13"></a>Backend Web API</h3>
+<p class="has-line-data" data-line-start="14" data-line-end="16">The backend webapi is developed with <a
+    href="http://ASP.NET">ASP.NET</a> Core and C#. It provides rest inteface for CRUD operations. It is hosted on 5000
+  port by default.<br>
+  It provides following rest endpoints</p>
+<ul>
+  <li class="has-line-data" data-line-start="16" data-line-end="17">get all customers, method: [get], route /customer
+  </li>
+  <li class="has-line-data" data-line-start="17" data-line-end="18">get single customer, method: [get], route
+    /customer/single?firstName=&amp;lastName=</li>
+  <li class="has-line-data" data-line-start="18" data-line-end="19">upsert(update if exists insert otherwise) [put or
+    post], route /customer</li>
+  <li class="has-line-data" data-line-start="19" data-line-end="21">delete method: [delete], route /customer</li>
+</ul>
+<h5 class="code-line" data-line-start=21 data-line-end=22><a id="Data_access_21"></a>Data access</h5>
+<p class="has-line-data" data-line-start="22" data-line-end="23">For data access layer Entity Framework Core with Code
+  First approach is used. On top of this Repository pattern without Unit of Work used. The repository is injected to
+  Controller so that it manages data persistence operations. The database can be initially created with
+  <code>dotnet ef migrations add InitialCreate</code> then after <code>dotnet ef database update</code></p>
+<h5 class="code-line" data-line-start=24 data-line-end=25><a id="Exception_handling_24"></a>Exception handling,</h5>
+<p class="has-line-data" data-line-start="25" data-line-end="26">For exception handling a middleware is created, which
+  is a central point to evaluate and log exceptions. Forlogging serilog is used. Because of the time contraints it is
+  not working right now but idea was to log into rolling file.</p>
+<h5 class="code-line" data-line-start=27 data-line-end=28><a id="Testing_27"></a>Testing,</h5>
+<p class="has-line-data" data-line-start="28" data-line-end="29">Considering application simplicity no unit tests was
+  developed. For testing rest endpoints however Swashbuckle Swagger component is used.</p>
+<hr>
+<h3 class="code-line" data-line-start=30 data-line-end=31><a id="Web_User_Interface_30"></a>Web User Interface</h3>
+<p class="has-line-data" data-line-start="31" data-line-end="32">The second component is client app. It has <a
+    href="http://ASP.Net">ASP.Net</a> Core Web api part to communicate with backend webapi and Angular SPA part as user
+  interface. Both web api and angular app hosted on 5001 port by default. The webapi has api prefix in route.</p>
+<h5 class="code-line" data-line-start=33 data-line-end=34><a id="ASPNet_Core_Web_api_33"></a><a
+    href="http://ASP.Net">ASP.Net</a> Core Web api</h5>
+<blockquote>
+  <p class="has-line-data" data-line-start="35" data-line-end="36">Browser security prevents a web page from making
+    requests to a different domain than the one that served the web page. This restriction is called the same-origin
+    policy. Usually it is the case that backend api and client user interface run on different hosts or domain. To deal
+    with that problem an extra web api <a href="http://layer.is">layer.is</a> required to communicate with backend
+    service.</p>
+</blockquote>
+<p class="has-line-data" data-line-start="37" data-line-end="38">The <a href="http://Asp.Net">Asp.Net</a> Core web api
+  part on client app project has the responsibility to making rest calls to the backend service. It is very simple and
+  straightforward service performs async rest calls using HttpClient and pass response to the angular. It has following
+  endpoints</p>
+<ul>
+  <li class="has-line-data" data-line-start="39" data-line-end="40">get all customers, method: [get], route
+    /api/customer</li>
+  <li class="has-line-data" data-line-start="40" data-line-end="41">get single customer, method: [get], route
+    /api/customer/single?firstName=&amp;lastName=</li>
+  <li class="has-line-data" data-line-start="41" data-line-end="42">upsert(update if exists insert otherwise) [put or
+    post], route /api/customer</li>
+  <li class="has-line-data" data-line-start="42" data-line-end="44">delete method: [delete], route /api/customer</li>
+</ul>
+<h5 class="code-line" data-line-start=44 data-line-end=45><a id="Angular_App_44"></a>Angular App</h5>
+<p class="has-line-data" data-line-start="45" data-line-end="46">This is part where end user interacts with. The
+  dependencies are listed in introduction of this document. It has three angular components</p>
+<ul>
+  <li class="has-line-data" data-line-start="46" data-line-end="47"><strong>Home:</strong> It is greeting page for end
+    users which contains brief information about application.</li>
+  <li class="has-line-data" data-line-start="47" data-line-end="48"><strong>Customer:</strong> The customers are listed
+    in table format. Edit or delete existing customers is possible.</li>
+  <li class="has-line-data" data-line-start="48" data-line-end="54"><strong>Customer form:</strong> Allows editing or
+    inserting new customers. In the component Angular ReactiveForms is used.<br>
+    – An existing customer data is displayed if first and last name is in querystring provided.<br>
+    – In first name and lastname fields typehead search suggestion(from PrimeNg) list is displayed. For the exising
+    first and last name customer information is retrieved from database.<br>
+    – The primary keys first and last name are case sensitive which means same name with different letter case can be
+    saved.<br>
+    – Form has validation controls for required fields and formatting of phone number and email.<br>
+    – Additionally a dirty check with canDeactive feature is made to warn user if unsaved data exists before leaving
+    form.</li>
+</ul>

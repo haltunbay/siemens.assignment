@@ -12,8 +12,10 @@ import { CustomerFormComponent } from './customer/customer-form/customer-form.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputMaskModule } from 'primeng/inputmask';
-import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { CanDeactivateCustomer } from './customer/can-deactive-guard';
 
 
 @NgModule({
@@ -33,11 +35,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     InputMaskModule,
     ConfirmDialogModule,
     MessagesModule,
+    MessageModule,
     AutoCompleteModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'customer', component: CustomerListComponent },
-      { path: 'customer-form', component: CustomerFormComponent }
+      { path: 'customer-form', component: CustomerFormComponent, canDeactivate: [CanDeactivateCustomer] }
     ])
   ],
   providers: [],

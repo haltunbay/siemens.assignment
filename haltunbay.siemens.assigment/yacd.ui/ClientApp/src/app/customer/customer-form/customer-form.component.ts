@@ -3,11 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../customer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
-  styleUrls: ['./customer-form.component.css']
+  styleUrls: ['./customer-form.component.css'],
+  providers: [ConfirmationService]
 })
 export class CustomerFormComponent implements OnInit {
   country: any;
@@ -27,7 +29,7 @@ export class CustomerFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private apiService: CustomerService,
-    private router: Router, private route: ActivatedRoute, private location: Location) { }
+    private router: Router, private route: ActivatedRoute, private location: Location, private confirmationService: ConfirmationService) { }
 
 
   ngOnInit() {
@@ -85,8 +87,8 @@ export class CustomerFormComponent implements OnInit {
   buildSuggestionLists() {
     this.apiService.getCustomers().subscribe(
       data => {
-        this.firstNames = data.map(c => c.firstName);
-        this.lastNames = data.map(c => c.lastName);
+        this.firstNames = [...new Set(data.map(c => c.firstName))];
+        this.lastNames = [...new Set(data.map(c => c.lastName))];
       },
       err => console.error(err),
       () => console.log(`done loading customers ${this.customers.length}`)
@@ -100,7 +102,15 @@ export class CustomerFormComponent implements OnInit {
           this.customerForm.setValue(data);
         }
       });
+  }
 
+  isFieldValid(fieldName: string) {
+    var field = this.customerForm.get(fieldName);
+    return (field.invalid && (field.dirty || field.touched));
+  }
+
+  canDeactivate() {
+    return this.customerForm.dirty;
   }
 }
 

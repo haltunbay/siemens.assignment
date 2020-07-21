@@ -12,35 +12,52 @@
                             class="glyphicon glyphicon-list"></span> List View</a>
                 </div>
                 <div class="p-field">
-                    <label for="firstName">First Name</label>
-                    <p-autoComplete formControlName="firstName" [suggestions]="filteredFirstNames"
-                        (completeMethod)="filterFirstNames($event)" (onSelect)="onSelectNameSuggestion($event)"
-                        [size]="50" [minLength]="1" required>
-                    </p-autoComplete>
-                    <span
-                        *ngIf="customerForm.get('firstName').invalid && (customerForm.get('firstName').dirty || customerForm.get('firstName').touched)"
-                        class="alert alert-danger">*</span>
+
+                    <label for="firstName">First Name(*)</label>
+                    <div class="ui-inputgroup">
+                        <p-autoComplete formControlName="firstName" [suggestions]="filteredFirstNames"
+                            (completeMethod)="filterFirstNames($event)" (onSelect)="onSelectNameSuggestion($event)"
+                            [size]="50" [minLength]="1" required>
+                        </p-autoComplete>
+                        <span *ngIf="isFieldValid('firstName')" class="ui-inputgroup-addon"><i
+                                class="glyphicon glyphicon-warning-sign"></i></span>
+                    </div>
                 </div>
 
                 <div class="p-field">
-                    <label for="lastName">Last Name</label>
-                    <p-autoComplete formControlName="lastName" [suggestions]="filteredLastNames"
-                        (completeMethod)="filterLastNames($event)" (onSelect)="onSelectNameSuggestion($event)"
-                        [size]="50" [minLength]="1" required>
-                    </p-autoComplete>
+                    <label for="lastName">Last Name(*)</label>
+                    <div class="ui-inputgroup">
+                        <p-autoComplete formControlName="lastName" [suggestions]="filteredLastNames"
+                            (completeMethod)="filterLastNames($event)" (onSelect)="onSelectNameSuggestion($event)"
+                            [size]="50" [minLength]="1" required>
+                        </p-autoComplete>
+                        <span *ngIf="isFieldValid('lastName')" class="ui-inputgroup-addon"><i
+                                class="glyphicon glyphicon-warning-sign"></i></span>
+                    </div>
                 </div>
                 <div class="p-field">
                     <label for="email">Email</label>
-                    <!-- <input type="text" class="form-control input-sm" formControlName="eMail" value=""> -->
-                    <input type="text" formControlName="eMail" class="form-control input-md" pInputText>
+                    <div class="ui-inputgroup">
+                        <input type="text" formControlName="eMail" class="form-control input-md" pInputText>
+                        <span *ngIf="isFieldValid('eMail')" class="ui-inputgroup-addon"><i
+                                class="glyphicon glyphicon-warning-sign"></i></span>
+                    </div>
                 </div>
                 <div class="p-field">
-                    <label for="city">City</label>
-                    <input type="text" formControlName="city" class="form-control input-md" pInputText required>
+                    <label for="city">City(*)</label>
+                    <div class="ui-inputgroup">
+                        <input type="text" formControlName="city" class="form-control input-md" pInputText required>
+                        <span *ngIf="isFieldValid('city')" class="ui-inputgroup-addon"><i
+                                class="glyphicon glyphicon-warning-sign"></i></span>
+                    </div>
                 </div>
                 <div class="p-field">
-                    <label for="address">Address</label>
-                    <input type="text" formControlName="address" class="form-control input-md" pInputText required>
+                    <label for="address">Address(*)</label>
+                    <div class="ui-inputgroup">
+                        <input type="text" formControlName="address" class="form-control input-md" pInputText required>
+                        <span *ngIf="isFieldValid('address')" class="ui-inputgroup-addon"><i
+                                class="glyphicon glyphicon-warning-sign"></i></span>
+                    </div>
                 </div>
                 <div class="p-field">
                     <label for="phoneNumber">Phone Number</label>

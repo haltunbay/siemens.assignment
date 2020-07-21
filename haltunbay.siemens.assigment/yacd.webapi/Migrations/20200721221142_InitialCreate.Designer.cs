@@ -8,7 +8,7 @@ using yacd.webapi.DAL;
 namespace yacd.webapi.Migrations
 {
     [DbContext(typeof(CustomerDbContext))]
-    [Migration("20200717212642_InitialCreate")]
+    [Migration("20200721221142_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -10,13 +10,20 @@ import { Location } from '@angular/common';
   styleUrls: ['./customer-form.component.css']
 })
 export class CustomerFormComponent implements OnInit {
+  country: any;
+  countries: any[];
+  filteredFirstNames: any[];
+  filteredLastNames: any[];
+  customers: customer[] = [];
+  firstNames: string[] = [];
+  lastNames: string[] = [];
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     eMail: ['', Validators.email],
     city: ['', Validators.required],
     address: ['', Validators.required],
-    phoneNumber: ['', Validators.pattern("[0-9 ]{12}")]
+    phoneNumber: ['']
   });
 
   constructor(private fb: FormBuilder, private apiService: CustomerService,
@@ -27,6 +34,7 @@ export class CustomerFormComponent implements OnInit {
     firstName: String;
     lastName: String;
     const _this = this;
+    this.buildSuggestionLists();
     this.route.queryParams.subscribe(params => {
       if (params['firstName'] && params['lastName']) {
         this.apiService.getCustomer(params['firstName'], params['lastName']).subscribe(data => {
@@ -51,7 +59,49 @@ export class CustomerFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.location.back();
+    this.router.navigateByUrl('/customer');
   }
 
+  filterFirstNames(event) {
+    this.filteredFirstNames = [];
+    for (let i = 0; i < this.firstNames.length; i++) {
+      let x = this.firstNames[i];
+      if (x.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+        this.filteredFirstNames.push(x);
+      }
+    }
+  }
+
+  filterLastNames(event) {
+    this.filteredLastNames = [];
+    for (let i = 0; i < this.lastNames.length; i++) {
+      let x = this.lastNames[i];
+      if (x.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+        this.filteredLastNames.push(x);
+      }
+    }
+  }
+
+  buildSuggestionLists() {
+    this.apiService.getCustomers().subscribe(
+      data => {
+        this.firstNames = data.map(c => c.firstName);
+        this.lastNames = data.map(c => c.lastName);
+      },
+      err => console.error(err),
+      () => console.log(`done loading customers ${this.customers.length}`)
+    );
+  }
+
+  onSelectNameSuggestion(event) {
+    this.apiService.getCustomer(this.customerForm.get('firstName').value, this.customerForm.get('lastName').value)
+      .subscribe(data => {
+        if (data) {
+          this.customerForm.setValue(data);
+        }
+      });
+
+  }
 }
+
+

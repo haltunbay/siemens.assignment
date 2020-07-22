@@ -20,7 +20,7 @@ It provides following rest endpoints
 - delete method: [delete], route /customer
 
 ##### Data access
-For data access layer Entity Framework Core with Code First approach is used. On top of this Repository pattern without Unit of Work used. The repository is injected to Controller so that it manages data persistence operations. The database can be initially created with `dotnet ef migrations add InitialCreate` then after `dotnet ef database update`
+For data access layer Entity Framework Core with Code First approach is used. On top of this Repository pattern without Unit of Work used. The repository is injected to Controller so that it manages data persistence operations. The database can be initially created with `dotnet ef migrations add InitialCreate` then after `dotnet ef database update`. The customers.db file is created under projects root folder. If file existed before should be deleted first.
 
 ##### Exception handling, 
 For exception handling a middleware is created, which is a central point to evaluate and log exceptions. Forlogging serilog is used. Because of the time contraints it is not working right now but idea was to log into  rolling file. 

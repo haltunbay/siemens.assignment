@@ -51,6 +51,7 @@ Beside that followingcomponents used
 - **CustomerService:** Service module for making http calls to the asp.net core web api. 
 - **CanDeactivateCustomer:** canDeactive guard for warning user before leaving form with unsaved changes. 
 -- An existing customer data is displayed if first and last name is in querystring provided. 
+
 -- In first name and lastname fields typehead search suggestion(from PrimeNg) list is displayed. For the exising first and last name customer information is retrieved from database. 
 -- The primary keys first and last name are case sensitive which means same name with different letter case can be saved. 
 -- Form has validation controls for required fields and formatting of phone number and email. 

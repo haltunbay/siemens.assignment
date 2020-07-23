@@ -28,8 +28,8 @@ For exception handling a middleware is created, which is a central point to eval
 ##### Testing,
 Considering application simplicity no unit tests was developed. For testing rest endpoints however Swashbuckle Swagger component is used. 
 ****
-### Web User Interface
-The second component is client app. It has ASP.Net Core Web api part to communicate with backend webapi and Angular SPA part as user interface. Both web api and angular app hosted  on 5001 port by default. The webapi has api prefix in route.
+### Web Frontend
+The second component is client app. It has ASP.Net Core Web api part to communicate with backend webapi includes an Angular SPA part as user interface. The angular app served inside asp.net core application using Microsoft.AspNetCore.SpaServices.Extensions. Both web api and angular app hosted  on 5001 port by default. 
 
 ##### ASP.Net Core Web api
 
@@ -47,8 +47,14 @@ This is part where end user interacts with. The dependencies are listed in intro
 - **Home:** It is greeting page for end users which contains brief information about application. 
 - **Customer:** The customers are listed in table format. Edit or delete existing customers is possible. 
 - **Customer form:** Allows editing or inserting new customers. In the component Angular ReactiveForms is used. 
+Beside that followingcomponents used
+- **CustomerService:** Service module for making http calls to the asp.net core web api. 
+- **CanDeactivateCustomer:** canDeactive guard for warning user before leaving form with unsaved changes. 
 -- An existing customer data is displayed if first and last name is in querystring provided. 
 -- In first name and lastname fields typehead search suggestion(from PrimeNg) list is displayed. For the exising first and last name customer information is retrieved from database. 
 -- The primary keys first and last name are case sensitive which means same name with different letter case can be saved. 
 -- Form has validation controls for required fields and formatting of phone number and email. 
 -- Additionally a dirty  check with canDeactive feature is made to warn user if unsaved data exists before leaving form.
+
+### Docker support
+To dockerize backend and frontend service Docker files is placed inside projects. The generated images pushed to the dockerhub with tag haltunbay/yacdbackend and haltunbay/yacdfrontend. They can be run with docker-compose.yml which placed in root folder. 

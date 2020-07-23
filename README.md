@@ -5,14 +5,14 @@ It is built with
 - Angular and TypeScript for client-side code
 - Bootstrap and PrimeNg for layout and styling (normally one of them could do work but based on my previous experince I preferred Bootstrap 3 for layout and styling, but I benefit from Primeng features like typehead and modal confirmations.)
 - EntityFrameworkCore for Data access
-- SQLite for persistence layer. SQLite is preferred because it is stable, cross-platform, serverless. Fits perfectly to our project needs.
+- SQLite for persistence layer. SQLite was preferred because it is stable, cross-platform, serverless. Fits perfectly to our project needs.
 - Swashbuckle Swagger for webapi testing
 - During development Visual Studio 2019 and Vs Code was used.
 
 ##  Application components. 
 The application consist of two components. 
 ### Backend Web API
-The  backend webapi is developed with ASP.NET Core and C#. It provides rest inteface for CRUD operations. It is hosted on 5000 port by default.
+The  backend webapi was developed with ASP.NET Core and C#. It provides rest inteface for CRUD operations. It is hosted on 5000 port by default.
 It provides following rest endpoints 
 - get all customers, method: [get], route /customer
 - get single customer, method: [get], route /customer/single?firstName=&lastName=
@@ -20,10 +20,10 @@ It provides following rest endpoints
 - delete method: [delete], route /customer
 
 ##### Data access
-For data access layer Entity Framework Core with Code First approach is used. On top of this Repository pattern without Unit of Work used. The repository is injected to Controller so that it manages data persistence operations. The database can be initially created with `dotnet ef migrations add InitialCreate` then after `dotnet ef database update`. The customers.db file is created under projects root folder. If file existed before should be deleted first.
+For data access layer Entity Framework Core with Code First approach was used. On top of this Repository pattern without Unit of Work used. The repository is injected to Controller so that it manages data persistence operations. The database can be initially created with `dotnet ef migrations add InitialCreate` then after `dotnet ef database update`. The customers.db file is created under projects root folder. If file existed before should be deleted first.
 
 ##### Exception handling, 
-For exception handling a middleware is created, which is a central point to evaluate and log exceptions. Forlogging serilog is used. Because of the time contraints it is not working right now but idea was to log into  rolling file. 
+For exception handling a middleware was created, which is a central point to evaluate and log exceptions. For logging serilog is used. Because of the time contraints it is not working right now but idea was to log into  rolling file. 
 
 ##### Testing,
 Considering application simplicity no unit tests was developed. For testing rest endpoints however Swashbuckle Swagger component is used. 

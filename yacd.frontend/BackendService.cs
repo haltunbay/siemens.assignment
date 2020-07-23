@@ -12,19 +12,17 @@ namespace yacd.ui
 {
     public class BackendService
     {
-        public HttpClient Client;
-        private readonly IHttpClientFactory _clientFactory;
+        public HttpClient httpClient;
 
         public BackendService(IHttpClientFactory clientFactory, IOptions<AppConfig> config)
         {
-            _clientFactory = clientFactory;
-            Client = clientFactory.CreateClient();
-            Client.BaseAddress = new Uri(config.Value.BackendWebApi);
+            httpClient = clientFactory.CreateClient();
+            httpClient.BaseAddress = new Uri(config.Value.BackendWebApi);
         }
 
         public async Task<IEnumerable<Customer>> getCustomers()
         {
-            var response = await Client.GetAsync("/customer");
+            var response = await httpClient.GetAsync("/customer");
             response.EnsureSuccessStatusCode();
             await using var responseStream = await response.Content.ReadAsStreamAsync();
             return await JsonSerializer.DeserializeAsync
@@ -33,7 +31,7 @@ namespace yacd.ui
 
         public async Task<Customer> getCustomer(string firstName, string lastName)
         {
-            var response = await Client.GetAsync($"/customer/single?firstName={firstName}&lastName={lastName}");
+            var response = await httpClient.GetAsync($"/customer/single?firstName={firstName}&lastName={lastName}");
             response.EnsureSuccessStatusCode();
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -51,7 +49,7 @@ namespace yacd.ui
                 "application/json");
 
             using var httpResponse =
-                await Client.PostAsync("/customer", json);
+                await httpClient.PostAsync("/customer", json);
 
             httpResponse.EnsureSuccessStatusCode();
         }
@@ -63,9 +61,9 @@ namespace yacd.ui
                 Encoding.UTF8,
                 "application/json");
             var method = HttpMethod.Delete;
-            var requestUri = new Uri(Client.BaseAddress + "customer");
+            var requestUri = new Uri(httpClient.BaseAddress + "customer");
             var request = new HttpRequestMessage { Content = json, Method = method, RequestUri = requestUri };
-            using var httpResponse = await Client.SendAsync(request);
+            using var httpResponse = await httpClient.SendAsync(request);
 
             httpResponse.EnsureSuccessStatusCode();
         }

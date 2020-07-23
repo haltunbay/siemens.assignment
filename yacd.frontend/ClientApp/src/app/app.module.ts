@@ -39,7 +39,7 @@ import { CanDeactivateCustomer } from './customer/can-deactive-guard';
     AutoCompleteModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'customer', component: CustomerListComponent },
+      { path: 'customers', component: CustomerListComponent },
       { path: 'customer-form', component: CustomerFormComponent, canDeactivate: [CanDeactivateCustomer] }
     ])
   ],

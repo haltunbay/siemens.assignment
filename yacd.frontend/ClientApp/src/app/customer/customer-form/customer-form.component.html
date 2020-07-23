@@ -8,7 +8,7 @@
         <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
             <div class="ui-fluid">
                 <div class="p-field">
-                    <a routerLink="/customer" routerLinkActive="active" class="btn btn-default"><span
+                    <a routerLink="/customers" routerLinkActive="active" class="btn btn-default"><span
                             class="glyphicon glyphicon-list"></span> List View</a>
                 </div>
                 <div class="p-field">
@@ -20,7 +20,7 @@
                             [size]="50" [minLength]="1" required>
                         </p-autoComplete>
                         <span *ngIf="isFieldValid('firstName')" class="ui-inputgroup-addon"><i
-                                class="glyphicon glyphicon-warning-sign"></i></span>
+                                class="glyphicon glyphicon-warning-sign text-danger"></i></span>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                             [size]="50" [minLength]="1" required>
                         </p-autoComplete>
                         <span *ngIf="isFieldValid('lastName')" class="ui-inputgroup-addon"><i
-                                class="glyphicon glyphicon-warning-sign"></i></span>
+                                class="glyphicon glyphicon-warning-sign text-danger"></i></span>
                     </div>
                 </div>
                 <div class="p-field">
@@ -40,7 +40,7 @@
                     <div class="ui-inputgroup">
                         <input type="text" formControlName="eMail" class="form-control input-md" pInputText>
                         <span *ngIf="isFieldValid('eMail')" class="ui-inputgroup-addon"><i
-                                class="glyphicon glyphicon-warning-sign"></i></span>
+                                class="glyphicon glyphicon-warning-sign text-danger"></i></span>
                     </div>
                 </div>
                 <div class="p-field">
@@ -48,7 +48,7 @@
                     <div class="ui-inputgroup">
                         <input type="text" formControlName="city" class="form-control input-md" pInputText required>
                         <span *ngIf="isFieldValid('city')" class="ui-inputgroup-addon"><i
-                                class="glyphicon glyphicon-warning-sign"></i></span>
+                                class="glyphicon glyphicon-warning-sign text-danger"></i></span>
                     </div>
                 </div>
                 <div class="p-field">
@@ -56,7 +56,7 @@
                     <div class="ui-inputgroup">
                         <input type="text" formControlName="address" class="form-control input-md" pInputText required>
                         <span *ngIf="isFieldValid('address')" class="ui-inputgroup-addon"><i
-                                class="glyphicon glyphicon-warning-sign"></i></span>
+                                class="glyphicon glyphicon-warning-sign text-danger"></i></span>
                     </div>
                 </div>
                 <div class="p-field">
